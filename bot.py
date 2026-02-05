@@ -10,8 +10,12 @@ from urllib.parse import urlparse, parse_qs, urlunparse, urlencode
 from typing import Optional, Tuple
 import time
 from itertools import islice
+
+from flask import Flask
+from threading import Thread
 # Load Opus với đường dẫn đầy đủ (Apple Silicon Homebrew)
 OPUS_PATH = '/opt/homebrew/lib/libopus.dylib'  # <-- Đây là fix chính!
+app = Flask(__name__)
 
 # Nếu Intel Mac: OPUS_PATH = '/usr/local/lib/libopus.dylib'
 
@@ -875,6 +879,18 @@ async def loop_cmd(ctx):
     repeat_mode[guild_id] = "off" if cur == "all" else "all"
     mode_text = "Tắt" if repeat_mode[guild_id] == "off" else "Tất cả"
     await ctx.send(f"Loop queue: **{mode_text}**")
+
+@app.route('/')
+def home():
+    return "Bot is alive! 🎶"
+
+def run_flask():
+    port = int(os.environ.get("PORT", 10000))  # Render dùng PORT env var
+    app.run(host='0.0.0.0', port=port)
+
+# Chạy Flask trong thread riêng
+flask_thread = Thread(target=run_flask)
+flask_thread.start()
 
 
 bot.run(TOKEN)
