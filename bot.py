@@ -14,7 +14,7 @@ from itertools import islice
 from flask import Flask
 from threading import Thread
 # Load Opus với đường dẫn đầy đủ (Apple Silicon Homebrew)
-OPUS_PATH = '/opt/homebrew/lib/libopus.dylib'  # <-- Đây là fix chính!
+OPUS_PATH = 'opus' #'/opt/homebrew/lib/libopus.dylib'  # <-- Đây là fix chính!
 app = Flask(__name__)
 
 # Nếu Intel Mac: OPUS_PATH = '/usr/local/lib/libopus.dylib'
