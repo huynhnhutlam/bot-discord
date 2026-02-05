@@ -1,0 +1,6 @@
+discord.py[voice]
+yt-dlp
+python-dotenv
+PyNaCl
+curl-cffi
+flask
