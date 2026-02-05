@@ -1,2 +1,7 @@
+providers = ['python']
+
 [phases.setup]
-nixPkgs = ['ffmpeg']
+nixPkgs = ['ffmpeg-full']
+
+[phases.build]
+cmds = ['pip install --no-cache-dir -r requirements.txt']
