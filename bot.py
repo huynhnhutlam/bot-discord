@@ -14,22 +14,22 @@ from itertools import islice
 from flask import Flask
 from threading import Thread
 # Load Opus với đường dẫn đầy đủ (Apple Silicon Homebrew)
-OPUS_PATH = 'opus' #'/opt/homebrew/lib/libopus.dylib'  # <-- Đây là fix chính!
+# OPUS_PATH = 'opus' #'/opt/homebrew/lib/libopus.dylib'  # <-- Đây là fix chính!
 app = Flask(__name__)
 
 # Nếu Intel Mac: OPUS_PATH = '/usr/local/lib/libopus.dylib'
 
-if not discord.opus.is_loaded():
-    try:
-        discord.opus.load_opus(OPUS_PATH)
-        print(f"Opus loaded thành công từ: {OPUS_PATH}")
-    except Exception as e:
-        print(f"Lỗi load Opus: {e}")
-        print("Kiểm tra file tồn tại bằng: ls /opt/homebrew/lib/libopus.dylib")
-        # Nếu vẫn lỗi, thử tên đơn giản (nếu brew link đúng)
-        discord.opus.load_opus('libopus.dylib')
+# if not discord.opus.is_loaded():
+#     try:
+#         discord.opus.load_opus(OPUS_PATH)
+#         print(f"Opus loaded thành công từ: {OPUS_PATH}")
+#     except Exception as e:
+#         print(f"Lỗi load Opus: {e}")
+#         print("Kiểm tra file tồn tại bằng: ls /opt/homebrew/lib/libopus.dylib")
+#         # Nếu vẫn lỗi, thử tên đơn giản (nếu brew link đúng)
+#         discord.opus.load_opus('libopus.dylib')
 
-print("Opus loaded status:", discord.opus.is_loaded())
+# print("Opus loaded status:", discord.opus.is_loaded())
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
